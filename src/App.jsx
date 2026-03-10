@@ -2,10 +2,11 @@ import { useState, useEffect} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { getCategory, getNominees, getPerson, getCategories } from './requests'
+import { getCategory, getNominees, getPerson, getCategories, getNomineesByYear } from './requests'
 
 const getTransformedNominees = async () => {
-  const nominees =  await getNominees();
+  // const nominees =  await getNominees();
+  const nominees = await getNomineesByYear(2025);
   const categories = await getCategories();
   const transformedNominees = {}
   categories.forEach((category) => {

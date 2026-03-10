@@ -20,6 +20,22 @@ export const getNominees = async () => {
   }
 };
 
+export const getNomineesByYear = async (year) => {
+  try {
+    const resp = await fetch(API_URL + `/get-nominees-by-year?year=${year}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    const data = json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};
+
 export const getCategories = async () => {
   try {
     const resp = await fetch(API_URL + "/get-categories", {
