@@ -4,7 +4,7 @@ const API_URL =
     ? "http://127.0.0.1:5000"
     : "https://jessica-election-backend.vercel.app";
 
-export const get_nominees = async () => {
+export const getNominees = async () => {
   try {
     const resp = await fetch(API_URL + "/get-nominees", {
       method: "GET",
@@ -13,18 +13,32 @@ export const get_nominees = async () => {
       },
     });
     const json = await resp.json();
-    console.log("json", json);
     data = json.data;
-    console.log("data", data);
-    return json;
+    return data;
   } catch {
     console.log("error");
   }
 };
 
-export const get_category = async (id) => {
+export const getCategory = async (id) => {
   try {
     const resp = await fetch(API_URL + `/get-category?id=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    const data =  json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};
+
+export const getPerson = async (id) => {
+  try {
+    const resp = await fetch(API_URL + `/get-person?id=${id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",

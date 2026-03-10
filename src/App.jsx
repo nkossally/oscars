@@ -2,13 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { get_nominees, get_category } from './requests'
+import { getCategory, getNominees, getPerson } from './requests'
 
 const blarg = async () => {
-  const category =  await get_category(1);
+  const category =  await getCategory(1);
 
+  const person =  await getPerson(1);
 
   console.log("category", category);
+  console.log("person", person);
   // console.log("nominees", nominees);
 }
 
