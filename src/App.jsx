@@ -55,7 +55,7 @@ function App() {
                   <li key={nominee.name}>
                     {nominee.name} {nominee.isWinner ? "(Winner)" : ""}
                   </li>
-                  {nominee.detail && <p>{nominee.detail}</p>}
+                  {nominee.detail && <p>for&nbsp;{nominee.detail}</p>}
                 </div>
               ))}
             </ul>
