@@ -2,11 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { getCategory, getNominees, getPerson } from './requests'
+import { getCategory, getNominees, getPerson, getCategories } from './requests'
 
 const getTransformedNominees = async () => {
   const nominees =  await getNominees();
-  const transformedNominees = []
+  const categories = await getCategories();
+  const transformedNominees = {}
+  categories.forEach((category) => {
+    transformedNominees[category.name] = [];
+  })
 
   const promises = nominees.map( async (nominee) => {
     const categoryResp = await getCategory(nominee.category_id);
@@ -15,10 +19,9 @@ const getTransformedNominees = async () => {
     const person = personResp.name
     const transformedNominee = {
       name: person,
-      category: category,
       isWinner: nominee.is_winner
     }
-    transformedNominees.push(transformedNominee);
+    transformedNominees[category].push(transformedNominee);
   })
   await Promise.all(promises);
   
