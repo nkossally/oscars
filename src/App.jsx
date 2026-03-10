@@ -19,7 +19,8 @@ const getTransformedNominees = async () => {
     const person = personResp.name
     const transformedNominee = {
       name: person,
-      isWinner: nominee.is_winner
+      isWinner: nominee.is_winner,
+      detail: nominee.detail
     }
     transformedNominees[category].push(transformedNominee);
   })
@@ -44,22 +45,25 @@ function App() {
 
   return (
     <>
-      <button onClick={getTransformedNominees} >
+      <button onClick={getTransformedNominees}>
         {Object.keys(transformedNominees).map((category) => (
           <div key={category}>
             <h2>{category}</h2>
             <ul>
               {transformedNominees[category].map((nominee) => (
-                <li key={nominee.name}>
-                  {nominee.name} {nominee.isWinner ? "(Winner)" : ""}
-                </li>
+                <div key={nominee.name}>
+                  <li key={nominee.name}>
+                    {nominee.name} {nominee.isWinner ? "(Winner)" : ""}
+                  </li>
+                  {nominee.detail && <p>{nominee.detail}</p>}
+                </div>
               ))}
             </ul>
           </div>
         ))}
-        </button>
+      </button>
     </>
-  )
+  );
 }
 
 export default App
