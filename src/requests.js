@@ -13,7 +13,7 @@ export const getNominees = async () => {
       },
     });
     const json = await resp.json();
-    data = json.data;
+    const data = json.data;
     return data;
   } catch {
     console.log("error");

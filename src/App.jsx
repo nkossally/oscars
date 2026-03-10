@@ -4,21 +4,32 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { getCategory, getNominees, getPerson } from './requests'
 
-const blarg = async () => {
-  const category =  await getCategory(1);
+const getTransformedNominees = async () => {
+  const nominees =  await getNominees();
+  const transformedNominees = []
 
-  const person =  await getPerson(1);
-
-  console.log("category", category);
-  console.log("person", person);
-  // console.log("nominees", nominees);
+  const promises = nominees.map( async (nominee) => {
+    const categoryResp = await getCategory(nominee.category_id);
+    const category = categoryResp.name
+    const personResp = await getPerson(nominee.person_id);
+    const person = personResp.name
+    const transformedNominee = {
+      name: person,
+      category: category,
+      isWinner: nominee.is_winner
+    }
+    transformedNominees.push(transformedNominee);
+  })
+  await Promise.all(promises);
+  
+  console.log("transformedNominees", transformedNominees);
 }
 
 function App() {
 
   return (
     <>
-      <button onClick={blarg} >
+      <button onClick={getTransformedNominees} >
         hello world
         </button>
     </>
