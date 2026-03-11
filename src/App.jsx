@@ -1,8 +1,8 @@
 import { useState, useEffect} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 import { getCategory, getNominees, getPerson, getCategories, getNomineesByYear } from './requests'
+import { Spinner } from './Spinner'
 
 const getTransformedNominees = async () => {
   // const nominees =  await getNominees();
@@ -43,6 +43,9 @@ function App() {
     fetchData();
   }, []);
 
+  if (Object.keys(transformedNominees).length === 0) {
+    return <Spinner />
+  }
 
   return (
     <>
