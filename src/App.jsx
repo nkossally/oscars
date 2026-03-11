@@ -54,7 +54,6 @@ function App() {
 
   return (
     <>
-      <button onClick={getTransformedNominees}>
         {Object.keys(transformedNominees).map((category) => (
           <div key={category}>
             <Choices
@@ -63,7 +62,6 @@ function App() {
             />
           </div>
         ))}
-      </button>
     </>
   );
 }

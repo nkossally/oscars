@@ -4,6 +4,50 @@ const API_URL =
     ? "http://127.0.0.1:5000"
     : "https://jessica-election-backend.vercel.app";
 
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2Y4ZTZlOGIyNjUyYjQ5ZWM5N2IwMjRiMzA5MWQxYiIsIm5iZiI6MTczMDYzNjE2Mi4zOTUyMzg5LCJzdWIiOiI2NzI3Njg4MzcyMGYwNDc2ZjYwZDg2MTgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.i0h3Z_Vnl0JqlxVlRJllOP9pZdB7ep0flUBxE_iPEos"
+
+const imageUrlBase = "https://image.tmdb.org/t/p/original"
+
+export const getMovieImage = async ( title ) => {
+  const url =
+    `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        `Bearer ${token}`,
+    },
+  };
+  try {
+    const resp = await fetch(url, options);
+    const json = await resp.json();
+    const imgUrlSuffix = json?.results[0]?.backdrop_path;
+    if(!imgUrlSuffix) return "";
+    return imageUrlBase + imgUrlSuffix;
+  } catch {}
+};
+
+export const getPersonImage = async ( name ) => {
+  const url =
+    `https://api.themoviedb.org/3/search/person?query=${name}`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        `Bearer ${token}`,
+    },
+  };
+  try {
+    const resp = await fetch(url, options);
+    const json = await resp.json();
+    const imgUrlSuffix = json?.results[0]?.profile_path;
+    if(!imgUrlSuffix) return "";
+    return imageUrlBase + imgUrlSuffix;
+  } catch {}
+};
+
 export const getNominees = async () => {
   try {
     const resp = await fetch(API_URL + "/get-nominees", {
