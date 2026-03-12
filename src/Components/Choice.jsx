@@ -5,7 +5,6 @@ import { CATEGORIES } from "../consts";
 
 export const Choice = ({ category, option }) => {
   const [imgUrl, setImgUrl] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const getImageWrapper = async () => {
@@ -14,9 +13,7 @@ export const Choice = ({ category, option }) => {
         category === CATEGORIES.BEST_ACTRESS ||
         category === CATEGORIES.BEST_SUPPORTING_ACTOR ||
         category === CATEGORIES.BEST_SUPPORTING_ACTRESS;
-      if (category == "Best Animated Short Film") {
-        // console.log(option.detail)
-      }
+
       const originalDetail = option.detail;
       let detail = option.detail;
       if (category == CATEGORIES.BEST_ORIGINAL_SONG) {
