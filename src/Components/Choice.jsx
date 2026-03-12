@@ -44,5 +44,5 @@ export const Choice = ({ category, option }) => {
   if (imgUrl) {
     return <img src={imgUrl} alt={optionName} className={"choice-image"} />;
   }
-  return <>pizza</>;
+  return <div className={"empty-choice"}>{optionName}</div>;
 };

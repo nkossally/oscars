@@ -10,6 +10,8 @@ import {
 } from "./requests";
 import { Spinner } from "./Components/Spinner";
 import { Choices } from "./Components/Choices";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { theme } from "./customTheme";
 
 const getTransformedNominees = async () => {
   // const nominees =  await getNominees();
@@ -53,7 +55,7 @@ function App() {
   }
 
   return (
-    <>
+   <ThemeProvider theme={theme}>
         {Object.keys(transformedNominees).map((category) => (
           <div key={category}>
             <Choices
@@ -62,7 +64,7 @@ function App() {
             />
           </div>
         ))}
-    </>
+    </ThemeProvider>
   );
 }
 

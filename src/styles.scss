@@ -1,5 +1,11 @@
 $primary: hsl(153, 47%, 49%);
 
+// Small (Mobile): 320px – 480px
+// Medium (Tablet): 481px – 768px
+// Large (Laptop/Small Desktop): 769px – 1024px
+// Extra Large (Desktop): 1025px – 1200px
+// XXL (Large Desktop): 1200px or 1400px+ 
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -104,4 +110,17 @@ body {
   width: 100px;
   // height: 150px;
   
+}
+
+.empty-choice{
+  width: 100px;
+  
+}
+.toggle-button {
+  background-color: lightblue;
+
+  @media (min-width: 768px) {
+    background-color: blue;
+    /* Other styles for screens smaller than 768px */
+  }
 }
