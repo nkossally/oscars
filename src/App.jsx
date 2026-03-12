@@ -13,20 +13,21 @@ import { Choices } from "./Components/Choices";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { theme } from "./customTheme";
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 const getTransformedNominees = async () => {
-  // const nominees =  await getNominees();
   const nominees = await getNomineesByYear(2025);
   const categories = await getCategories();
   const transformedNominees = {};
   categories.forEach((category) => {
     transformedNominees[category.name] = [];
   });
-
-  const promises = nominees.map(async (nominee) => {
-    const categoryResp = await getCategory(nominee.category_id);
-    const category = categoryResp.name;
-    const personResp = await getPerson(nominee.person_id);
-    const person = personResp.name;
+  nominees.forEach((nominee) => {
+    const person = nominee["person"]["name"];
+    const category = nominee["category"]["name"];
     const transformedNominee = {
       name: person,
       isWinner: nominee.is_winner,
@@ -34,8 +35,7 @@ const getTransformedNominees = async () => {
     };
     transformedNominees[category].push(transformedNominee);
   });
-  await Promise.all(promises);
-
+  console.log(transformedNominees);
   return transformedNominees;
 };
 
