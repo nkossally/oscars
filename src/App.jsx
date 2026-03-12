@@ -8,37 +8,59 @@ import { Choices } from "./Components/Choices";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { theme } from "./customTheme";
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-const getTransformedNominees = async () => {
-  const nominees = await getNomineesByYear(2025);
-  const categories = await getCategories();
-  const transformedNominees = {};
-  categories.forEach((category) => {
-    transformedNominees[category.name] = [];
-  });
-  nominees.forEach((nominee) => {
-    const person = nominee["person"]["name"];
-    const category = nominee["category"]["name"];
-    const transformedNominee = {
-      name: person,
-      isWinner: nominee.is_winner,
-      detail: nominee.detail,
-    };
-    if (category === "Best Picture") {
-      console.log("Best Picture nominee:", transformedNominee);
-    }
-    transformedNominees[category].push(transformedNominee);
-  });
-  console.log(transformedNominees);
-  return transformedNominees;
-};
-
 function App() {
   const [transformedNominees, setTransformedNominees] = useState({});
+  const [winners, setWinners] = useState({});
+  const [selections, setSelections] = useState({});
+  const [score, setScore] = useState(0);
+
+  const getTransformedNominees = async () => {
+    const nominees = await getNomineesByYear(2025);
+    const categories = await getCategories();
+    const transformedNominees = {};
+    const newWinners = {};
+    categories.forEach((category) => {
+      transformedNominees[category.name] = [];
+      newWinners[category.name] = null;
+    });
+    if(Object.keys(selections).length === 0) {
+      const newSelections = {};
+      categories.forEach((category) => {
+        selections[category.name] = null;
+      });
+      setSelections(newSelections);
+    }
+    nominees.forEach((nominee) => {
+      const person = nominee["person"]["name"];
+      const category = nominee["category"]["name"];
+      const transformedNominee = {
+        name: person,
+        isWinner: nominee.is_winner,
+        detail: nominee.detail,
+      };
+      if (nominee.is_winner) {
+        newWinners[category] = person;
+      }
+
+      transformedNominees[category].push(transformedNominee);
+    });
+    setWinners(newWinners);
+    return transformedNominees;
+  };
+
+  const getScore = () => {
+    let newScore = 0;
+    Object.keys(selections).forEach((category) => {
+      if (selections[category] && selections[category].includes(winners[category])) {
+        newScore += 1;
+      }
+    });
+    setScore(newScore);
+  }
+
+  useEffect(() => {
+    getScore();
+  }, [selections, winners]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,15 +75,18 @@ function App() {
   }
 
   return (
-   <ThemeProvider theme={theme}>
-        {Object.keys(transformedNominees).map((category) => (
-          <div key={category}>
-            <Choices
-              category={category}
-              options={transformedNominees[category]}
-            />
-          </div>
-        ))}
+    <ThemeProvider theme={theme}>
+      Score: {score}
+      {Object.keys(transformedNominees).map((category) => (
+        <div key={category}>
+          <Choices
+            category={category}
+            options={transformedNominees[category]}
+            selections={selections}
+            setSelections={setSelections}
+          />
+        </div>
+      ))}
     </ThemeProvider>
   );
 }

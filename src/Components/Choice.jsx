@@ -14,7 +14,6 @@ export const Choice = ({ category, option }) => {
         category === CATEGORIES.BEST_SUPPORTING_ACTOR ||
         category === CATEGORIES.BEST_SUPPORTING_ACTRESS;
 
-      const originalDetail = option.detail;
       let detail = option.detail;
       if (category == CATEGORIES.BEST_ORIGINAL_SONG) {
         const clean = detail.replace(/\u00A0/g, " ");
@@ -23,7 +22,6 @@ export const Choice = ({ category, option }) => {
         if (idx !== -1) {
           detail = clean.substring(idx + 5);
         }
-        console.log("detail", idx, originalDetail, detail);
       }
 
       if (isActor) {

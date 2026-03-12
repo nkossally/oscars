@@ -18,12 +18,13 @@ const toggleStyle = {
   },
 };
 
-export const Choices = ({ category, options }) => {
+export const Choices = ({ category, options, selections, setSelections }) => {
   const [value, setValue] = React.useState("one");
 
   const handleChange = (event, newValue) => {
     if (newValue !== null) {
       setValue(newValue);
+      setSelections({ ...selections, [category]: newValue });
     }
   };
 
