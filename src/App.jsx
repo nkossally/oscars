@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import {
-  getCategory,
-  getNominees,
-  getPerson,
   getCategories,
   getNomineesByYear,
 } from "./requests";
@@ -33,6 +28,9 @@ const getTransformedNominees = async () => {
       isWinner: nominee.is_winner,
       detail: nominee.detail,
     };
+    if (category === "Best Picture") {
+      console.log("Best Picture nominee:", transformedNominee);
+    }
     transformedNominees[category].push(transformedNominee);
   });
   console.log(transformedNominees);
