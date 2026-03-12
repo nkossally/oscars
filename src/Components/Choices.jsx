@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Choice } from "./Choice";
@@ -10,13 +9,12 @@ const toggleContainerStyle = {
   flexDirection: "row",
   flexWrap: "wrap",
   gap: "10px",
-  // justifyContent: "center",
 };
 
-const blarg = {
+const toggleStyle = {
   width: {
     xs: "100%",
-    sm: "50%",
+    sm: "300px",
   },
 };
 
@@ -44,7 +42,7 @@ export const Choices = ({ category, options }) => {
           return (
             <ToggleButton
               value={optionName}
-              sx={blarg}
+              sx={toggleStyle}
             >
               <Choice category={category} option={option} />
             </ToggleButton>

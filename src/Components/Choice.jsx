@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import classNames from 'classnames';
 import { getMovieImage, getPersonImage } from "../requests";
 import { CATEGORIES } from "../consts";
 
 export const Choice = ({ category, option }) => {
   const [imgUrl, setImgUrl] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const getImageWrapper = async () => {
@@ -26,7 +26,7 @@ export const Choice = ({ category, option }) => {
         if (idx !== -1) {
           detail = clean.substring(idx + 5);
         }
-        console.log("detail",idx, originalDetail, detail);
+        console.log("detail", idx, originalDetail, detail);
       }
 
       if (isActor) {
@@ -42,7 +42,13 @@ export const Choice = ({ category, option }) => {
 
   const optionName = `${option.name}${option.detail ? ` for ${option.detail}` : ""}`;
   if (imgUrl) {
-    return <img src={imgUrl} alt={optionName} className={"choice-image"} />;
+    return (
+      <div className={"hover-container"}>
+        <img src={imgUrl} alt={optionName} className={classNames("choice-image")} />
+        
+        <div className={classNames("empty-choice", "hidden-content")}>{optionName}</div>
+      </div>
+    );
   }
   return <div className={"empty-choice"}>{optionName}</div>;
 };

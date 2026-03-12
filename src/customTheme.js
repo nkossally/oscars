@@ -11,3 +11,9 @@ export const theme = createTheme({
     },
   },
 });
+
+// Small (Mobile): 320px – 480px
+// Medium (Tablet): 481px – 768px
+// Large (Laptop/Small Desktop): 769px – 1024px
+// Extra Large (Desktop): 1025px – 1200px
+// XXL (Large Desktop): 1200px or 1400px+ 
