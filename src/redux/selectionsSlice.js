@@ -5,8 +5,7 @@ const selectionsSlice = createSlice({
   initialState: {},
   reducers: {
     update: (state, action) => {
-      state = action.payload;
-      return state;
+      Object.assign(state, action.payload);
     },
   }
 });

@@ -24,7 +24,6 @@ export const Choices = ({ category, options }) => {
   const [value, setValue] = React.useState("one");
   const selections = useSelector((state) => state.selections);
   const dispatch = useDispatch();
-  console.log("selections in choices", selections);
 
   const handleChange = (event, newValue) => {
     if (newValue !== null) {
