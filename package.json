@@ -1,5 +1,6 @@
 {
   "name": "oscars",
+  "homepage": "https://nkossally.github.io/oscars/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
