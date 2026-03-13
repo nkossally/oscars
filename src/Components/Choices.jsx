@@ -21,8 +21,8 @@ const toggleStyle = {
 };
 
 export const Choices = ({ category, options }) => {
-  const [value, setValue] = React.useState("one");
   const selections = useSelector((state) => state.selections);
+  const [value, setValue] = useState(selections[category]);
   const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
