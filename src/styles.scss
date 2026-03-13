@@ -116,17 +116,22 @@ body {
   }  
 }
 
-.hidden-content {
+.show-on-hover {
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-.hover-container:hover .hidden-content {
+.hide-on-hover {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.hover-container:hover .show-on-hover {
   opacity: 1;
 }
 
-.choices-container {
-  margin: 50px  50px;
+.hover-container:hover .hide-on-hover {
+  opacity: .5;
 }
 
 .category-title {
@@ -134,3 +139,17 @@ body {
   margin-bottom: 20px;
 }
 
+.ballot-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 100px;
+  @media (max-width: 600px) {
+
+  }
+}
+
+.score{
+  font-size: 32px;
+  font-weight: 500;
+  margin: 20px 0px;
+}

@@ -7,8 +7,6 @@ import {
 } from "../requests";
 import { Spinner } from "./Spinner";
 import { Choices } from "./Choices";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { theme } from "../customTheme";
 
 export const Ballot = () => {
   const [transformedNominees, setTransformedNominees] = useState({});
@@ -83,8 +81,10 @@ export const Ballot = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <div className="ballot-container">
+      <div className="score">
       Score: {score}
+      </div>
       {Object.keys(transformedNominees).map((category) => (
         <div key={category}>
           <Choices
@@ -93,6 +93,6 @@ export const Ballot = () => {
           />
         </div>
       ))}
-    </ThemeProvider>
+    </div>
   );
 }

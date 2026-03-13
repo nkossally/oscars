@@ -34,7 +34,7 @@ export const Choices = ({ category, options }) => {
   };
 
   return (
-   <div className={"choices-container"  }>
+   <div>
       <div className={"category-title"}>{category}</div>
       <ToggleButtonGroup
         value={value}

@@ -39,9 +39,9 @@ export const Choice = ({ category, option }) => {
   if (imgUrl) {
     return (
       <div className={"hover-container"}>
-        <img src={imgUrl} alt={optionName} className={classNames("choice-image")} />
+        <img src={imgUrl} alt={optionName} className={classNames("choice-image", "hide-on-hover")} />
         
-        <div className={classNames("empty-choice", "hidden-content")}>{optionName}</div>
+        <div className={classNames("empty-choice", "show-on-hover")}>{optionName}</div>
       </div>
     );
   }
