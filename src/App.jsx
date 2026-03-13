@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { update } from "./redux/selectionsSlice";
 import {
   getCategories,
   getNomineesByYear,
@@ -11,8 +13,9 @@ import { theme } from "./customTheme";
 function App() {
   const [transformedNominees, setTransformedNominees] = useState({});
   const [winners, setWinners] = useState({});
-  const [selections, setSelections] = useState({});
   const [score, setScore] = useState(0);
+  const selections = useSelector((state) => state.selections);
+  const dispatch = useDispatch();
 
   const getTransformedNominees = async () => {
     const nominees = await getNomineesByYear(2025);
@@ -23,12 +26,13 @@ function App() {
       transformedNominees[category.name] = [];
       newWinners[category.name] = null;
     });
-    if(Object.keys(selections).length === 0) {
+    if(!selections || Object.keys(selections).length === 0) {
       const newSelections = {};
       categories.forEach((category) => {
-        selections[category.name] = null;
+        newSelections[category.name] = null;
       });
-      setSelections(newSelections);
+      dispatch(update(newSelections));
+      
     }
     nominees.forEach((nominee) => {
       const person = nominee["person"]["name"];
@@ -49,6 +53,10 @@ function App() {
   };
 
   const getScore = () => {
+    if (!selections || Object.keys(selections).length === 0) {
+      return
+    }
+
     let newScore = 0;
     Object.keys(selections).forEach((category) => {
       if (selections[category] && selections[category].includes(winners[category])) {
@@ -82,8 +90,6 @@ function App() {
           <Choices
             category={category}
             options={transformedNominees[category]}
-            selections={selections}
-            setSelections={setSelections}
           />
         </div>
       ))}

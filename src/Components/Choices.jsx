@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { update } from "../redux/selectionsSlice";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Choice } from "./Choice";
@@ -18,13 +20,16 @@ const toggleStyle = {
   },
 };
 
-export const Choices = ({ category, options, selections, setSelections }) => {
+export const Choices = ({ category, options }) => {
   const [value, setValue] = React.useState("one");
+  const selections = useSelector((state) => state.selections);
+  const dispatch = useDispatch();
+  console.log("selections in choices", selections);
 
   const handleChange = (event, newValue) => {
     if (newValue !== null) {
       setValue(newValue);
-      setSelections({ ...selections, [category]: newValue });
+      dispatch(update({ ...selections, [category]: newValue }));
     }
   };
 
