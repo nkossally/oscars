@@ -1,98 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { update } from "./redux/selectionsSlice";
-import {
-  getCategories,
-  getNomineesByYear,
-} from "./requests";
+import { getCategories, getNomineesByYear } from "./requests";
 import { Spinner } from "./Components/Spinner";
 import { Choices } from "./Components/Choices";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Ballot } from "./Components/Ballot";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./customTheme";
 
 function App() {
-  const [transformedNominees, setTransformedNominees] = useState({});
-  const [winners, setWinners] = useState({});
-  const [score, setScore] = useState(0);
-  const selections = useSelector((state) => state.selections);
-  const dispatch = useDispatch();
-
-  const getTransformedNominees = async () => {
-    const nominees = await getNomineesByYear(2025);
-    const categories = await getCategories();
-    const transformedNominees = {};
-    const newWinners = {};
-    categories.forEach((category) => {
-      transformedNominees[category.name] = [];
-      newWinners[category.name] = null;
-    });
-    if(!selections || Object.keys(selections).length === 0) {
-      const newSelections = {};
-      categories.forEach((category) => {
-        newSelections[category.name] = null;
-      });
-      dispatch(update(newSelections));
-      
-    }
-    nominees.forEach((nominee) => {
-      const person = nominee["person"]["name"];
-      const category = nominee["category"]["name"];
-      const transformedNominee = {
-        name: person,
-        isWinner: nominee.is_winner,
-        detail: nominee.detail,
-      };
-      if (nominee.is_winner) {
-        newWinners[category] = person;
-      }
-
-      transformedNominees[category].push(transformedNominee);
-    });
-    setWinners(newWinners);
-    return transformedNominees;
-  };
-
-  const getScore = () => {
-    if (!selections || Object.keys(selections).length === 0) {
-      return
-    }
-
-    let newScore = 0;
-    Object.keys(selections).forEach((category) => {
-      if (selections[category] && selections[category].includes(winners[category])) {
-        newScore += 1;
-      }
-    });
-    setScore(newScore);
-  }
-
-  useEffect(() => {
-    getScore();
-  }, [selections, winners]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const transformed = await getTransformedNominees();
-      setTransformedNominees(transformed);
-    };
-    fetchData();
-  }, []);
-
-  if (Object.keys(transformedNominees).length === 0) {
-    return <Spinner />;
-  }
-
   return (
     <ThemeProvider theme={theme}>
-      Score: {score}
-      {Object.keys(transformedNominees).map((category) => (
-        <div key={category}>
-          <Choices
-            category={category}
-            options={transformedNominees[category]}
-          />
-        </div>
-      ))}
+      <Ballot />
     </ThemeProvider>
   );
 }
