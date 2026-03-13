@@ -1,8 +1,9 @@
 const env = process.env.NODE_ENV;
-const API_URL =
-  env === "development"
-    ? "http://127.0.0.1:5000"
-    : "https://jessica-election-backend.vercel.app";
+// const API_URL =
+//   env === "development"
+//     ? "http://127.0.0.1:5000"
+//     : "https://oscarsbackend.vercel.app";
+const API_URL = "https://oscarsbackend.vercel.app";
 
 const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2Y4ZTZlOGIyNjUyYjQ5ZWM5N2IwMjRiMzA5MWQxYiIsIm5iZiI6MTczMDYzNjE2Mi4zOTUyMzg5LCJzdWIiOiI2NzI3Njg4MzcyMGYwNDc2ZjYwZDg2MTgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.i0h3Z_Vnl0JqlxVlRJllOP9pZdB7ep0flUBxE_iPEos"
 
