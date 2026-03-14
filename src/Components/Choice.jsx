@@ -9,7 +9,10 @@ export const Choice = ({ category, option }) => {
   const selections = useSelector((state) => state.selections);
   
   const selectedValue = selections[category];
-  const isChoiceSlected = selectedValue === option.name 
+  const isChoiceSlected = selectedValue === option.name || selectedValue === `${option.name} for ${option.detail}`;
+  if(selectedValue) {
+    console.log("selectedValue", selectedValue, "option.name", option.name );
+  }
   useEffect(() => {
     const getImageWrapper = async () => {
       const isActor =
@@ -45,7 +48,7 @@ export const Choice = ({ category, option }) => {
       <div className={"hover-container"}>
         <img src={imgUrl} alt={optionName} className={classNames("choice-image", "hide-on-hover")} />
         
-        <div className={classNames("empty-choice", "show-on-hover")}>{optionName}</div>
+        <div className={classNames("empty-choice", !isChoiceSlected && "show-on-hover")}>{optionName}</div>
       </div>
     );
   }

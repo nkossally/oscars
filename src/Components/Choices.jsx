@@ -4,7 +4,7 @@ import { update } from "../redux/selectionsSlice";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Choice } from "./Choice";
-import { border, borderRadius } from "@mui/system";
+import { border, borderRadius, minHeight } from "@mui/system";
 
 const gray1 = "#1F262D";
 const gray2 = "#232C34";
@@ -15,7 +15,7 @@ const toggleContainerStyle = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  gap: "10px",
+  gap: "8px",
 };
 
 const toggleStyle = {
@@ -24,6 +24,8 @@ const toggleStyle = {
     sm: "300px",
   },
   color: "white",
+  minHeight: "300px",
+  borderRadius: "8px !important",
   backgroundColor: gray2,
   "&:hover": {
     border: `2px solid ${gray3}`, // Optional: add a border when selected
