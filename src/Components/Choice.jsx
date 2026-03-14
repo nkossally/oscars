@@ -10,9 +10,7 @@ export const Choice = ({ category, option }) => {
   
   const selectedValue = selections[category];
   const isChoiceSlected = selectedValue === option.name || selectedValue === `${option.name} for ${option.detail}`;
-  if(selectedValue) {
-    console.log("selectedValue", selectedValue, "option.name", option.name );
-  }
+
   useEffect(() => {
     const getImageWrapper = async () => {
       const isActor =
