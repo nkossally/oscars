@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import classNames from 'classnames';
 import { getMovieImage, getPersonImage } from "../requests";
 import { CATEGORIES } from "../consts";
 
 export const Choice = ({ category, option }) => {
   const [imgUrl, setImgUrl] = useState("");
-
+  const selections = useSelector((state) => state.selections);
+  
+  const selectedValue = selections[category];
+  const isChoiceSlected = selectedValue === option.name 
   useEffect(() => {
     const getImageWrapper = async () => {
       const isActor =

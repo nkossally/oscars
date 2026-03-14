@@ -1,4 +1,9 @@
 $primary: hsl(153, 47%, 49%);
+$gray1: #1F262D;
+$gray2: #232C34; 
+$gray3: #445566;
+$gray4: #445466;
+$darkGray: #15181C;
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -30,6 +35,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: $gray1;
+  color: white;
 }
 
 h1 {
