@@ -90,7 +90,7 @@ export const Ballot = () => {
       Score: {score}
       </div>
       {Object.keys(transformedNominees).map((category) => (
-        <div key={category}>
+        transformedNominees[category].length > 0 && <div key={category}>
           <Choices
             category={category}
             options={transformedNominees[category]}
