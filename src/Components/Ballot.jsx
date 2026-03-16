@@ -22,7 +22,7 @@ export const Ballot = () => {
     const newWinners = {};
     categories.forEach((category) => {
       transformedNominees[category.name] = [];
-      newWinners[category.name] = null;
+      newWinners[category.name] = [];
     });
     if(!selections || Object.keys(selections).length === 0) {
       const newSelections = {};
@@ -41,7 +41,7 @@ export const Ballot = () => {
         detail: nominee.detail,
       };
       if (nominee.is_winner) {
-        newWinners[category] = person;
+        newWinners[category].push(person);
       }
 
       transformedNominees[category].push(transformedNominee);
@@ -57,8 +57,12 @@ export const Ballot = () => {
 
     let newScore = 0;
     Object.keys(selections).forEach((category) => {
-      if (selections[category] && selections[category].includes(winners[category])) {
-        newScore += 1;
+      if (winners[category]) {
+        winners[category].forEach((winner) => {
+          if (selections[category] && selections[category].includes(winner)) {
+            newScore += 1;
+          }
+        });
       }
     });
     setScore(newScore);
