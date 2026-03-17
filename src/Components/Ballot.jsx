@@ -41,7 +41,7 @@ export const Ballot = () => {
         detail: nominee.detail,
       };
       if (nominee.is_winner) {
-        newWinners[category].push(person);
+        newWinners[category].push(transformedNominee);
       }
 
       transformedNominees[category].push(transformedNominee);
@@ -52,21 +52,27 @@ export const Ballot = () => {
 
   const getScore = () => {
     if (!selections || Object.keys(selections).length === 0) {
-      return
+      return;
     }
 
     let newScore = 0;
     Object.keys(selections).forEach((category) => {
+      const selection = selections[category];
+
       if (winners[category]) {
         winners[category].forEach((winner) => {
-          if (selections[category] && selections[category].includes(winner)) {
+          if (
+            selection &&
+            selection.includes(winner.name) &&
+            selection.includes(winner.detail)
+          ) {
             newScore += 1;
           }
         });
       }
     });
     setScore(newScore);
-  }
+  };
 
   useEffect(() => {
     getScore();
