@@ -25,7 +25,7 @@ export const OldChoices = ({ category, options }) => {
   };
 
   return (
-    <div>
+    <div className={"old-choice"}>
       <div className={"category-title"}>{category}</div>
       <div>
         {options.map((option) => {

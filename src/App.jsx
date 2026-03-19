@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { update } from "./redux/selectionsSlice";
 import { getCategories, getNomineesByYear } from "./requests";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -13,24 +11,38 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./customTheme";
 
 function App() {
-    const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const customTheme = {
+  colors: { primary: '#007bff', background: '#ffffff' },
+  // ... more theme properties
+  
+};
+
+  const tabStyle = {
+    '& .MuiTabs-indicator': {
+          display: 'none', // This hides the indicator (underline)
+        },
+
+  };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs value={value} onChange={handleChange}>
-        <Tab label="Tab 1" />
-        <Tab label="Tab 2" />
-      </Tabs>
+    <ThemeProvider theme={createTheme(theme)}>
+      <Box sx={{ width: "100%" }}>
+        <Tabs value={value} onChange={handleChange} centered sx={tabStyle}>
+          <Tab label="Current Ballot" />
+          <Tab label="Previous Nominees" />
+        </Tabs>
 
-      <Box sx={{ mt: 2 }}>
-        {value === 0 && <Ballot />}
-        {value === 1 && <OldBallot />}
+        <Box sx={{ mt: 2 }}>
+          {value === 0 && <Ballot />}
+          {value === 1 && <OldBallot />}
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 

@@ -4,7 +4,7 @@ import { update } from "../redux/selectionsSlice";
 import { getCategories, getNomineesByYear } from "../requests";
 import { Spinner } from "./Spinner";
 import { Choices } from "./Choices";
-import {OldChoices} from "./OldChoices";
+import { OldChoices } from "./OldChoices";
 import { DownshfitAutocomplete } from "./DownshfitAutocomplete";
 
 export const OldBallot = () => {
@@ -65,20 +65,21 @@ export const OldBallot = () => {
   console.log(year);
 
   return (
-    <div className="ballot-container">
+    <div className="old-ballot-container">
       <DownshfitAutocomplete handleSelect={setYear} />
-      <div className="score">Score: {score}</div>
-      {Object.keys(transformedNominees).map(
-        (category) =>
-          transformedNominees[category].length > 0 && (
-            <div key={category}>
-              <OldChoices
-                category={category}
-                options={transformedNominees[category]}
-              />
-            </div>
-          ),
-      )}
+      <div className={"old-ballot-inner-container"}>
+        {Object.keys(transformedNominees).map(
+          (category) =>
+            transformedNominees[category].length > 0 && (
+              <div key={category}>
+                <OldChoices
+                  category={category}
+                  options={transformedNominees[category]}
+                />
+              </div>
+            ),
+        )}
+      </div>
     </div>
   );
 };
