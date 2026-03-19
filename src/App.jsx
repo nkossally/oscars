@@ -22,19 +22,26 @@ function App() {
   
 };
 
-  const tabStyle = {
+  const tabsContainerStyle = {
+    color: 'white',
     '& .MuiTabs-indicator': {
           display: 'none', // This hides the indicator (underline)
         },
 
   };
 
+  const tabStyle = {
+    color: 'white',
+
+
+  };
+
   return (
     <ThemeProvider theme={createTheme(theme)}>
       <Box sx={{ width: "100%" }}>
-        <Tabs value={value} onChange={handleChange} centered sx={tabStyle}>
-          <Tab label="Current Ballot" />
-          <Tab label="Previous Nominees" />
+        <Tabs value={value} onChange={handleChange} centered sx={tabsContainerStyle}>
+          <Tab label="Current Ballot" sx={tabStyle}/>
+          <Tab label="Previous Nominees" sx={tabStyle} />
         </Tabs>
 
         <Box sx={{ mt: 2 }}>
