@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { update } from "../redux/selectionsSlice";
-import {
-  getCategories,
-  getNomineesByYear,
-} from "../requests";
+import { getCategories, getNomineesByYear } from "../requests";
 import { Spinner } from "./Spinner";
 import { Choices } from "./Choices";
+import {OldChoices} from "./OldChoices";
 import { DownshfitAutocomplete } from "./DownshfitAutocomplete";
 
 export const OldBallot = () => {
@@ -26,13 +24,12 @@ export const OldBallot = () => {
       transformedNominees[category.name] = [];
       newWinners[category.name] = [];
     });
-    if(!selections || Object.keys(selections).length === 0) {
+    if (!selections || Object.keys(selections).length === 0) {
       const newSelections = {};
       categories.forEach((category) => {
         newSelections[category.name] = null;
       });
       dispatch(update(newSelections));
-      
     }
     nominees.forEach((nominee) => {
       const person = nominee["person"]["name"];
@@ -52,34 +49,6 @@ export const OldBallot = () => {
     return transformedNominees;
   };
 
-  const getScore = () => {
-    if (!selections || Object.keys(selections).length === 0) {
-      return;
-    }
-
-    let newScore = 0;
-    Object.keys(selections).forEach((category) => {
-      const selection = selections[category];
-
-      if (winners[category]) {
-        winners[category].forEach((winner) => {
-          if (
-            selection &&
-            selection.includes(winner.name) &&
-            selection.includes(winner.detail)
-          ) {
-            newScore += 1;
-          }
-        });
-      }
-    });
-    setScore(newScore);
-  };
-
-  useEffect(() => {
-    getScore();
-  }, [selections, winners]);
-
   useEffect(() => {
     const fetchData = async () => {
       const transformed = await getTransformedNominees();
@@ -88,24 +57,28 @@ export const OldBallot = () => {
     fetchData();
   }, [year]);
 
+  useEffect(() => {}, [year]);
+
   if (Object.keys(transformedNominees).length === 0) {
     return <Spinner />;
   }
+  console.log(year);
 
   return (
     <div className="ballot-container">
-        <DownshfitAutocomplete handleSelect={setYear}/>
-      <div className="score">
-      Score: {score}
-      </div>
-      {Object.keys(transformedNominees).map((category) => (
-        transformedNominees[category].length > 0 && <div key={category}>
-          <Choices
-            category={category}
-            options={transformedNominees[category]}
-          />
-        </div>
-      ))}
+      <DownshfitAutocomplete handleSelect={setYear} />
+      <div className="score">Score: {score}</div>
+      {Object.keys(transformedNominees).map(
+        (category) =>
+          transformedNominees[category].length > 0 && (
+            <div key={category}>
+              <OldChoices
+                category={category}
+                options={transformedNominees[category]}
+              />
+            </div>
+          ),
+      )}
     </div>
   );
-}
+};
