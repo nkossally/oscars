@@ -5,46 +5,43 @@ const env = process.env.NODE_ENV;
 //     : "https://oscarsbackend.vercel.app";
 const API_URL = "https://oscarsbackend.vercel.app";
 
-const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2Y4ZTZlOGIyNjUyYjQ5ZWM5N2IwMjRiMzA5MWQxYiIsIm5iZiI6MTczMDYzNjE2Mi4zOTUyMzg5LCJzdWIiOiI2NzI3Njg4MzcyMGYwNDc2ZjYwZDg2MTgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.i0h3Z_Vnl0JqlxVlRJllOP9pZdB7ep0flUBxE_iPEos"
+const token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2Y4ZTZlOGIyNjUyYjQ5ZWM5N2IwMjRiMzA5MWQxYiIsIm5iZiI6MTczMDYzNjE2Mi4zOTUyMzg5LCJzdWIiOiI2NzI3Njg4MzcyMGYwNDc2ZjYwZDg2MTgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.i0h3Z_Vnl0JqlxVlRJllOP9pZdB7ep0flUBxE_iPEos";
 
-const imageUrlBase = "https://image.tmdb.org/t/p/original"
+const imageUrlBase = "https://image.tmdb.org/t/p/original";
 
-export const getMovieImage = async ( title ) => {
-  const url =
-    `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`;
+export const getMovieImage = async (title) => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`;
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   try {
     const resp = await fetch(url, options);
     const json = await resp.json();
     const imgUrlSuffix = json?.results[0]?.backdrop_path;
-    if(!imgUrlSuffix) return "";
+    if (!imgUrlSuffix) return "";
     return imageUrlBase + imgUrlSuffix;
   } catch {}
 };
 
-export const getPersonImage = async ( name ) => {
-  const url =
-    `https://api.themoviedb.org/3/search/person?query=${name}`;
+export const getPersonImage = async (name) => {
+  const url = `https://api.themoviedb.org/3/search/person?query=${name}`;
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
   try {
     const resp = await fetch(url, options);
     const json = await resp.json();
     const imgUrlSuffix = json?.results[0]?.profile_path;
-    if(!imgUrlSuffix) return "";
+    if (!imgUrlSuffix) return "";
     return imageUrlBase + imgUrlSuffix;
   } catch {}
 };
@@ -106,7 +103,7 @@ export const getCategory = async (id) => {
       },
     });
     const json = await resp.json();
-    const data =  json.data;
+    const data = json.data;
     return data;
   } catch {
     console.log("error");
@@ -122,7 +119,26 @@ export const getPerson = async (id) => {
       },
     });
     const json = await resp.json();
-    const data =  json.data;
+    const data = json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};
+
+export const getNominationsByName = async (name) => {
+  try {
+    const resp = await fetch(
+      API_URL + `/get-nominations-by-name?name=${name}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      },
+    );
+    const json = await resp.json();
+    const data = json.data;
     return data;
   } catch {
     console.log("error");

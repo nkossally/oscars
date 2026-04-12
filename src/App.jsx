@@ -7,7 +7,8 @@ import { Spinner } from "./Components/Spinner";
 import { Choices } from "./Components/Choices";
 import { Ballot } from "./Components/Ballot";
 import { OldBallot } from "./Components/OldBallot";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { SearchNominations} from "./Components/SearchNominations";
+import { createTheme, ThemeProvider} from "@mui/material/styles";
 import { theme } from "./customTheme";
 
 function App() {
@@ -42,11 +43,13 @@ function App() {
         <Tabs value={value} onChange={handleChange} centered sx={tabsContainerStyle}>
           <Tab label="Current Ballot" sx={tabStyle}/>
           <Tab label="Previous Nominees" sx={tabStyle} />
+          <Tab label="Search Nominations" sx={tabStyle} />
         </Tabs>
 
         <Box sx={{ mt: 2 }}>
           {value === 0 && <Ballot />}
           {value === 1 && <OldBallot />}
+          {value === 2 && <SearchNominations />}
         </Box>
       </Box>
     </ThemeProvider>
