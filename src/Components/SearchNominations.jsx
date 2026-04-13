@@ -13,6 +13,7 @@ export const SearchNominations = () => {
   const [nominations, setNominations] = useState([]);
   const [name, setName] = useState("");
   const [input, setInput] = useState("");
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -21,14 +22,10 @@ export const SearchNominations = () => {
   const handleSearch = async () => {
     const data = await getNominationsByName(input);
     if (data && data.length > 0){
-      setName(data[0]["person"]["name"]);
+      setName(data[0]["name"]);
       setNominations(data);
     }
   };
-
-  useEffect(() => {
-    getNominationsByName("Brad Pitt");
-  }, []);
 
   return (
     <div className="ballot-container">
@@ -42,7 +39,7 @@ export const SearchNominations = () => {
       {nominations.length > 0 ? (
         nominations.map((nomination, idx) => (
           <div key={name + idx} >
-            <h3>{nomination.category.name}</h3>
+            <h3>{nomination.category}</h3>
             <p>{nomination.detail}</p>
             <p>{nomination.year}</p>
             <p>{nomination.is_winner ? "Winner" : "Nominee"}</p>
