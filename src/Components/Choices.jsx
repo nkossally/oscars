@@ -16,6 +16,7 @@ const toggleContainerStyle = {
   flexDirection: "row",
   flexWrap: "wrap",
   gap: "8px",
+    justifyContent: "center",
 };
 
 const toggleStyle = {
