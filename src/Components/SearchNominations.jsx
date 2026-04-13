@@ -8,23 +8,27 @@ import {
 } from "../requests";
 import { Spinner } from "./Spinner";
 import { Choices } from "./Choices";
+import { NominationCard } from "./NominationCard";
 
 export const SearchNominations = () => {
   const [nominations, setNominations] = useState([]);
   const [input, setInput] = useState("");
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
   };
 
   const handleSearch = async () => {
+    setIsLoading(true);
     const data = await getNominationsByName(input);
     if (data && data.length > 0) {
       setNominations(data);
     } else {
       setNominations([]);
     }
+    setIsLoading(false);
     setIsFirstLoad(false);
   };
 
@@ -33,6 +37,10 @@ export const SearchNominations = () => {
   ) : (
     <p>No nominations found.</p>
   );
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="search-nominations-container">
@@ -48,14 +56,16 @@ export const SearchNominations = () => {
       </button>
       {nominations.length > 0 ? (
         <>
-          <div>{nominations[0].name}</div>
+          <div className="nominee-name">{nominations[0].name}</div>
           {nominations.map((nomination, idx) => (
-            <div key={name + idx}>
-              <h3>{nomination.category}</h3>
-              <p>{nomination.detail}</p>
-              <p>{nomination.year}</p>
-              <p>{nomination.is_winner ? "Winner" : "Nominee"}</p>
-            </div>
+            <NominationCard
+              key={nomination.category + nomination.year + idx}
+              category={nomination.category}
+              detail={nomination.detail}
+              year={nomination.year}
+              isWinner={nomination.is_winner}
+            />    
+  
           ))}
         </>
       ) : (

@@ -262,7 +262,7 @@ body {
 }
 
 .autocomplete-input{
-  width: 100px;
+  width: 120px;
   height: 25px;
   padding: 8px;
   color: "black";
@@ -276,3 +276,20 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.nomination-card {
+  width: 250px;
+  margin: 5px 0px;
+    margin-bottom: 20px;
+    padding: 5px 40px;
+  border-bottom: 1px dotted white;
+
+}
+
+.nominee-name {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 40px 0px 10px 0px;
+
+
+} 
