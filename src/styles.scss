@@ -7,6 +7,8 @@ $gray3: #445566;
 $gray4: #445466;
 $gray5: #445366;
 
+$gold: #FFD700;
+
 $darkGray: #15181C;
 
 $blue1: #007bff;
@@ -137,6 +139,13 @@ body {
   animation: spin 0.7s linear infinite;
 }
 
+.choices-container {
+  display: flex;
+  flex-direction: column;
+
+
+}
+
 .choice-image {
   width: 200px;
   height: 200px;
@@ -186,6 +195,8 @@ body {
 .ballot-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 10px 100px;
 
   @media (max-width: 600px) {}
@@ -219,6 +230,16 @@ body {
   }
 }
 
+.single-choice {
+  width: fit-content;
+  padding: 0px 5px;
+}
+
+.old-choice-winner{
+  border: 1px solid $gold;
+  border-radius: 5px;
+}
+
 
 .score {
   font-size: 20px;
@@ -226,16 +247,19 @@ body {
   margin: 20px 0px;
   position: fixed;
   top: 55px;
-  left: 2px;
+   right: 5px;
   padding: 5px;
   border-radius: 5px;
+  border: 1px solid white;
   background-color: $darkGray;
+  z-index: 10000;
 }
 
-.nominations-search{
-  width: 200px;
-  height: 30px;
+.nominations-search-input{
+  width: 210px;
+  height: 25px;
   margin: 20px 0px;
+  font-size: 20px;
 
 }
 

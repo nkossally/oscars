@@ -44,7 +44,7 @@ export const SearchNominations = () => {
         value={input}
         onChange={handleInputChange}
         placeholder="Type name of nominee..."
-        className="nominations-search"
+        className="nominations-search-input"
       />
       <button onClick={handleSearch} type="submit" className={"nominations-button"}>
         Search
