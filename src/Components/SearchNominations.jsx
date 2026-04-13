@@ -64,7 +64,7 @@ export const SearchNominations = () => {
           ))}
         </>
       ) : (
-        <div>{NoNominationsElem}</div>
+        <div className="no-nominations">{NoNominationsElem}</div>
       )}
     </form>
   );
