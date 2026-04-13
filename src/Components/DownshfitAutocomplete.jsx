@@ -151,6 +151,7 @@ export const DownshfitAutocomplete = ({ handleSelect }) => {
                 backgroundColor:
                   highlightedIndex === index ? "#bde4ff" : "white",
                 cursor: "pointer",
+                border: "1px solid #445366",
               }}
             >
               {item}
