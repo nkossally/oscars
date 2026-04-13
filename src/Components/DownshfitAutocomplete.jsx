@@ -129,7 +129,7 @@ export const DownshfitAutocomplete = ({ handleSelect }) => {
   });
 
   return (
-    <div style={{ width: 250 }}>
+    <div className={"autocomplete-container"}>
       <input
         placeholder="Search years..."
         {...getInputProps()}

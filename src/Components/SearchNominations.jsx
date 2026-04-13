@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { update } from "../redux/selectionsSlice";
 import {
-  getCategories,
-  getNomineesByYear,
   getNominationsByName,
 } from "../requests";
 import { Spinner } from "./Spinner";
-import { Choices } from "./Choices";
 import { NominationCard } from "./NominationCard";
 
 export const SearchNominations = () => {
@@ -43,7 +38,7 @@ export const SearchNominations = () => {
   }
 
   return (
-    <div className="search-nominations-container">
+    <form className="search-nominations-container">
       <input
         type="text"
         value={input}
@@ -51,7 +46,7 @@ export const SearchNominations = () => {
         placeholder="Type name of nominee..."
         className="nominations-search"
       />
-      <button onClick={handleSearch} className={"nominations-button"}>
+      <button onClick={handleSearch} type="submit" className={"nominations-button"}>
         Search
       </button>
       {nominations.length > 0 ? (
@@ -71,6 +66,6 @@ export const SearchNominations = () => {
       ) : (
         <div>{NoNominationsElem}</div>
       )}
-    </div>
+    </form>
   );
 };

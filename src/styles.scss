@@ -261,10 +261,17 @@ body {
   width: 100%;
 }
 
+.autocomplete-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .autocomplete-input{
   width: 120px;
   height: 25px;
-  padding: 8px;
+  padding: 3px;
   color: "black";
   font-size: 20px;
   // margin: 0px 0px 0px 20px;
