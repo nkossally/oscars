@@ -62,7 +62,6 @@ export const OldBallot = () => {
   if (Object.keys(transformedNominees).length === 0) {
     return <Spinner />;
   }
-  console.log(year);
 
   return (
     <div className="old-ballot-container">

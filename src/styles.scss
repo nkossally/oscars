@@ -263,6 +263,10 @@ body {
 
 }
 
+.nomination-card-winner{
+  color: $gold;
+}
+
 .nominations-button{
   width: 200px;
   height: 30px;
@@ -278,6 +282,11 @@ body {
   &:hover {
     background-color: $blue1;
   }
+  &:disabled {
+    background-color: gray;
+    opacity: 50%;
+    cursor: not-allowed;
+  }
 }
 
 .search-nominations-container {
@@ -286,7 +295,13 @@ body {
   align-items: center;
   width: 100%;
 }
-
+.counts-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 .autocomplete-container {
   width: 100%;
   display: flex;
