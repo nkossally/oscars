@@ -7,6 +7,11 @@ $gray5: #445366;
 
 $darkGray: #15181C;
 
+$blue1: #007bff;
+$blue2: #0056b3;
+$blue3: #66b2ff;
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -236,10 +241,17 @@ body {
 .nominations-button{
   width: 200px;
   height: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
   text-align: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
+  background-color: $blue3;
+  &:hover {
+    background-color: $blue1;
+  }
 }
 
 .search-nominations-container {
