@@ -45,7 +45,7 @@ function App() {
             sx={tabsContainerStyle}
           >
             <Tab label="Current Ballot" sx={tabStyle} />
-            <Tab label="Previous Nominees" sx={tabStyle} />
+            <Tab label="Previous Ballots" sx={tabStyle} />
             <Tab label="Search Nominations" sx={tabStyle} />
           </Tabs>
 

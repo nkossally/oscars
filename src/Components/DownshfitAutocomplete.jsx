@@ -133,17 +133,12 @@ export const DownshfitAutocomplete = ({ handleSelect }) => {
       <input
         placeholder="Search years..."
         {...getInputProps()}
-        style={{ width: "100%", padding: "8px", color: "black" }}
+        className="autocomplete-input"
       />
 
       <ul
         {...getMenuProps()}
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: 0,
-          border: "1px solid #ccc",
-        }}
+        className={"autocomplete-list"}
       >
         {isOpen &&
           inputItems.map((item, index) => (

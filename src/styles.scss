@@ -225,3 +225,42 @@ body {
   border-radius: 5px;
   background-color: $darkGray;
 }
+
+.nominations-search{
+  width: 200px;
+  height: 30px;
+  margin: 20px 0px;
+
+}
+
+.nominations-button{
+  width: 200px;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-nominations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.autocomplete-input{
+  width: 100px;
+  height: 25px;
+  padding: 8px;
+  color: "black";
+  font-size: 20px;
+  // margin: 0px 0px 0px 20px;
+}
+
+.autocomplete-list {
+  list-style: none;
+  width: 100px;
+  padding: 0;
+  margin: 0;
+}

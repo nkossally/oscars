@@ -22,6 +22,8 @@ export const SearchNominations = () => {
     const data = await getNominationsByName(input);
     if (data && data.length > 0) {
       setNominations(data);
+    } else {
+      setNominations([]);
     }
     setIsFirstLoad(false);
   };
@@ -33,14 +35,17 @@ export const SearchNominations = () => {
   );
 
   return (
-    <div className="ballot-container">
+    <div className="search-nominations-container">
       <input
         type="text"
         value={input}
         onChange={handleInputChange}
         placeholder="Type name of nominee..."
+        className="nominations-search"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch} className={"nominations-button"}>
+        Search
+      </button>
       {nominations.length > 0 ? (
         <>
           <div>{nominations[0].name}</div>
