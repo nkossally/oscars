@@ -25,8 +25,10 @@ export const OldChoices = ({ category, options }) => {
       <div className={"category-title"}>{category}</div>
       <div >
         {options.map((option) => {
-          const optionName = `${option.name}${option.detail ? ` for ${option.detail}` : ""}`;
-
+          let optionName = `${option.name}${option.detail ? ` for ${option.detail}` : ""}`;
+          if (option.name && option.detail && option.name === option.detail){
+            optionName = option.name
+          }
           return (
             <div className={classNames("single-choice", option.isWinner && "old-choice-winner")} key={optionName}>
               {optionName}

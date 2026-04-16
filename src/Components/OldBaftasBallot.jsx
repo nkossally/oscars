@@ -117,10 +117,11 @@ export const OldBaftasBallot = () => {
       dispatch(update(newSelections));
     }
     nominees.forEach((nominee) => {
-      const person = nominee["person"]["name"];
+      const person = nominee["person"]
+      const person_name = person ? person["name"] : "Unknown"
       const category = nominee["category_bafta"]["name"];
       const transformedNominee = {
-        name: person,
+        name: person_name,
         isWinner: nominee.is_winner,
         detail: nominee.detail,
       };
