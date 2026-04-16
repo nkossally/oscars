@@ -3,7 +3,8 @@ const env = process.env.NODE_ENV;
 //   env === "development"
 //     ? "http://127.0.0.1:5000"
 //     : "https://oscarsbackend.vercel.app";
-const API_URL = "https://oscarsbackend.vercel.app";
+// const API_URL = "https://oscarsbackend.vercel.app";
+const API_URL =  "http://127.0.0.1:5000"
 
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2Y4ZTZlOGIyNjUyYjQ5ZWM5N2IwMjRiMzA5MWQxYiIsIm5iZiI6MTczMDYzNjE2Mi4zOTUyMzg5LCJzdWIiOiI2NzI3Njg4MzcyMGYwNDc2ZjYwZDg2MTgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.i0h3Z_Vnl0JqlxVlRJllOP9pZdB7ep0flUBxE_iPEos";
@@ -78,9 +79,41 @@ export const getNomineesByYear = async (year) => {
   }
 };
 
+export const getBaftaNomineesByYear = async (year) => {
+  try {
+    const resp = await fetch(API_URL + `/get-bafta-nominees-by-year?year=${year}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    const data = json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};
+
 export const getCategories = async () => {
   try {
     const resp = await fetch(API_URL + "/get-categories", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    const data = json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};
+
+export const getBaftaCategories = async () => {
+  try {
+    const resp = await fetch(API_URL + "/get-bafta-categories", {
       method: "GET",
       headers: {
         "Content-type": "application/json",

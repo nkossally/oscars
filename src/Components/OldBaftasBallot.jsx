@@ -1,35 +1,16 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { update } from "../redux/selectionsSlice";
-import { getCategories, getNomineesByYear } from "../requests";
+import { getCategories, getNomineesByYear, getBaftaCategories, getBaftaNomineesByYear } from "../requests";
 import { Spinner } from "./Spinner";
 import { Choices } from "./Choices";
 import { OldChoices } from "./OldChoices";
 import { DownshfitAutocomplete } from "./DownshfitAutocomplete";
+import { compileString } from "sass";
 
 const INITIAL_YEAR = 2025
 
 const years = [
-  "1927/28",
-  "1928/29",
-  "1929/30",
-  "1930/31",
-  "1931/32",
-  "1932/33",
-  1934,
-  1935,
-  1936,
-  1937,
-  1938,
-  1939,
-  1940,
-  1941,
-  1942,
-  1943,
-  1944,
-  1945,
-  1946,
-  1947,
   1948,
   1949,
   1950,
@@ -110,8 +91,7 @@ const years = [
   2025,
 ];
 
-
-export const OldBallot = () => {
+export const OldBaftasBallot = () => {
   const [transformedNominees, setTransformedNominees] = useState({});
   const [winners, setWinners] = useState({});
   const [score, setScore] = useState(0);
@@ -120,8 +100,9 @@ export const OldBallot = () => {
   const dispatch = useDispatch();
 
   const getTransformedNominees = async () => {
-    const nominees = await getNomineesByYear(year);
-    const categories = await getCategories();
+    const nominees = await getBaftaNomineesByYear(year);
+    const categories = await getBaftaCategories();
+
     const transformedNominees = {};
     const newWinners = {};
     categories.forEach((category) => {
@@ -137,7 +118,7 @@ export const OldBallot = () => {
     }
     nominees.forEach((nominee) => {
       const person = nominee["person"]["name"];
-      const category = nominee["category"]["name"];
+      const category = nominee["category_bafta"]["name"];
       const transformedNominee = {
         name: person,
         isWinner: nominee.is_winner,
