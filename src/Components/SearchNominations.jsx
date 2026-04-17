@@ -70,15 +70,24 @@ export const SearchNominations = () => {
         placeholder="Type name of nominee..."
         className="nominations-search-input"
       />
-      <button disabled={!input.trim()} onClick={handleSearch} type="submit" className={"nominations-button"}>
+      <button
+        disabled={!input.trim()}
+        onClick={handleSearch}
+        type="submit"
+        className={"nominations-button"}
+      >
         Search
       </button>
       {nominations.length > 0 ? (
         <>
           <div className="nominee-name">{nameLabel}</div>
           <div className={"counts-container"}>
-            <div >{`${nominationsCount} nomination${nominationsCount !== 1 ? 's' : ''}`}</div>
-            <div > {`${winCount} win${winCount !== 1 ? 's' : ''}` }</div>
+            <div className={"counts-inner-container"}>
+              <div>{`${nominationsCount} nomination${nominationsCount !== 1 ? "s" : ""}`}</div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div> {`${winCount} win${winCount !== 1 ? "s" : ""}`}</div>
+            </div>
+
+            <div> * win count includes noncompetitve honorary oscars</div>
           </div>
           {nominations.map((nomination, idx) => (
             <NominationCard
@@ -89,8 +98,7 @@ export const SearchNominations = () => {
               isWinner={nomination.is_winner}
               note={nomination.note}
               name={nomination.name}
-            />    
-  
+            />
           ))}
         </>
       ) : (
