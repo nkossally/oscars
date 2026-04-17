@@ -28,7 +28,7 @@ export const SearchNominations = () => {
       const nameCounter = {};
       let highCount = 0;
       let bestName = ""
-      nominations.forEach((nomination) => {
+      data.forEach((nomination) => {
         name = nomination["name"];
         if (nameCounter[name] == undefined) {
           nameCounter[name] = 0;
@@ -50,10 +50,6 @@ export const SearchNominations = () => {
     setIsLoading(false);
     setIsFirstLoad(false);
   };
-
-  useEffect(()=>{
-
-  },[nameLabel, nominations])
 
   const NoNominationsElem = isFirstLoad ? (
     <p>Search for a nominee to see their nominations.</p>
