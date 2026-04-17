@@ -12,6 +12,7 @@ export const SearchNominations = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [nominationsCount, setNominationsCount] = useState(0);
   const [winCount, setWinCount] = useState(0);
+  const [nameLabel, setNameLabel] = useState("")
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -24,8 +25,23 @@ export const SearchNominations = () => {
       setNominations(data);
 
       setNominationsCount(data.length);
+      const nameCounter = {};
+      let highCount = 0;
+      let bestName = ""
+      nominations.forEach((nomination) => {
+        name = nomination["name"];
+        if (nameCounter[name] == undefined) {
+          nameCounter[name] = 0;
+        }
+        nameCounter[name] += 1;
+        if (nameCounter[name] > highCount) {
+          highCount = nameCounter[name];
+          bestName = name;
+        }
+      });
       const wins = data.filter((nomination) => nomination.is_winner).length;
       setWinCount(wins);
+      setNameLabel(bestName)
     } else {
       setNominations([]);
       setNominationsCount(0);
@@ -34,6 +50,10 @@ export const SearchNominations = () => {
     setIsLoading(false);
     setIsFirstLoad(false);
   };
+
+  useEffect(()=>{
+
+  },[nameLabel, nominations])
 
   const NoNominationsElem = isFirstLoad ? (
     <p>Search for a nominee to see their nominations.</p>
@@ -59,7 +79,7 @@ export const SearchNominations = () => {
       </button>
       {nominations.length > 0 ? (
         <>
-          <div className="nominee-name">{nominations[0].name}</div>
+          <div className="nominee-name">{nameLabel}</div>
           <div className={"counts-container"}>
             <div >{`${nominationsCount} nomination${nominationsCount !== 1 ? 's' : ''}`}</div>
             <div > {`${winCount} win${winCount !== 1 ? 's' : ''}` }</div>
