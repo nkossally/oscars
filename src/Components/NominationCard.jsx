@@ -1,8 +1,9 @@
-export const NominationCard = ({ year, category, detail, isWinner , note}) => {
+export const NominationCard = ({ year, category, detail, isWinner , note, name}) => {
   return (
     <div className={"nomination-card"}>
       <div>{year}</div>
       <div>{category}</div>
+      <div>{name}</div>
       {detail && <div className="nomination-detail">{detail}</div>}
       <div className={isWinner ? "nomination-card-winner" : ""}>
         {isWinner ? "Winner" : "Nominee"}

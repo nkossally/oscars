@@ -72,6 +72,7 @@ export const SearchNominations = () => {
               year={nomination.year}
               isWinner={nomination.is_winner}
               note={nomination.note}
+              name={nomination.name}
             />    
   
           ))}
