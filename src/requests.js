@@ -176,3 +176,20 @@ export const getNominationsByName = async (name) => {
     console.log("error");
   }
 };
+
+export const getDoubleWins = async (category) => {
+
+  try {
+    const resp = await fetch(API_URL + `/get-double-wins?category=${category}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await resp.json();
+    const data = json.data;
+    return data;
+  } catch {
+    console.log("error");
+  }
+};

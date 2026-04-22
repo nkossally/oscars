@@ -9,6 +9,7 @@ import { Ballot } from "./Components/Ballot";
 import { OldBallot } from "./Components/OldBallot";
 import { OldBaftasBallot } from "./Components/OldBaftasBallot";
 import { SearchNominations } from "./Components/SearchNominations";
+import { DoubleWins } from "./DoubleWins";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./customTheme";
 
@@ -49,6 +50,7 @@ function App() {
             <Tab label="Previous Ballots" sx={tabStyle} />
             <Tab label="Search Nominations" sx={tabStyle} />
             <Tab label="Previous BAFTAs Ballots" sx={tabStyle} />
+            <Tab label="Double Wins" sx={tabStyle} />
           </Tabs>
 
           <Box sx={{ mt: 2 }}>
@@ -56,7 +58,7 @@ function App() {
             {value === 1 && <OldBallot />}
             {value === 2 && <SearchNominations />}
             {value === 3 && <OldBaftasBallot />}
-
+            {value === 4 && <DoubleWins />}
           </Box>
         </div>
       </Box>
