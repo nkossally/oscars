@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import {Spinner} from "./Spinner"
 
-import { getDoubleWins } from "./requests";
+import { getDoubleWins } from "../requests";
 
 const INITIAL_CATEGORY = "Actress"
 
@@ -31,22 +32,33 @@ const tabStyle = {
 };
 
 export const DoubleWins = () => {
-  const [category, setCategory] = useState("Actress");
+  const [category, setCategory] = useState(INITIAL_CATEGORY);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = async (event, newValue) => {
+    setIsLoading(true)
     setCategory(newValue);
     const responseData = await getDoubleWins(newValue);
     setData(responseData);
+    setIsLoading(false)
   };
 
   useEffect(() => {
     const wrapper = async () => {
+      setIsLoading(true)
       const responseData = await getDoubleWins(INITIAL_CATEGORY);
       setData(responseData);
+      setIsLoading(false)
     };
     wrapper()
-  });
+  }, []);
+
+  if(isLoading){
+    return (
+        <Spinner />
+    )
+  }
 
   return (
     <Box sx={{ width: "100%" }}>

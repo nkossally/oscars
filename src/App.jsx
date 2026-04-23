@@ -9,7 +9,7 @@ import { Ballot } from "./Components/Ballot";
 import { OldBallot } from "./Components/OldBallot";
 import { OldBaftasBallot } from "./Components/OldBaftasBallot";
 import { SearchNominations } from "./Components/SearchNominations";
-import { DoubleWins } from "./DoubleWins";
+import { DoubleWins } from "./Components/DoubleWins";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { theme } from "./customTheme";
 
