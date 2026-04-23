@@ -9,10 +9,10 @@ import { getDoubleWins } from "../requests";
 const INITIAL_CATEGORY = "Actress";
 
 const CATEGORIES = {
-  Actor: "Actor",
   Actress: "Actress",
-  "Supporting Actor": "Supporting Actor",
+  Actor: "Actor",
   "Supporting Actress": "Supporting Actress",
+  "Supporting Actor": "Supporting Actor",
 };
 
 const tabsContainerStyle = {
@@ -72,18 +72,19 @@ export const DoubleWins = () => {
           centered
           sx={tabsContainerStyle}
         >
-          <Tab label="Actor" value="Actor" sx={tabStyle} />
           <Tab label="Actress" value="Actress" sx={tabStyle} />
-          <Tab
-            label="Supporting Actor"
-            value="Supporting Actor"
-            sx={tabStyle}
-          />
+          <Tab label="Actor" value="Actor" sx={tabStyle} />
           <Tab
             label="Supporting Actress"
             value="Supporting Actress"
             sx={tabStyle}
           />
+          <Tab
+            label="Supporting Actor"
+            value="Supporting Actor"
+            sx={tabStyle}
+          />
+
         </Tabs>
         {isLoading && <Spinner />}
         {!isLoading && (
