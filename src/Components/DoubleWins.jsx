@@ -84,7 +84,6 @@ export const DoubleWins = () => {
             value="Supporting Actor"
             sx={tabStyle}
           />
-
         </Tabs>
         {isLoading && <Spinner />}
         {!isLoading && (
@@ -94,7 +93,7 @@ export const DoubleWins = () => {
                 return (
                   <div
                     className={"double-win-list-row"}
-                  >{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
+                  >{`${datum["oscar"].year}: ${datum["oscar"].name} - ${datum["oscar"].detail}`}</div>
                 );
               })}
             </Box>
