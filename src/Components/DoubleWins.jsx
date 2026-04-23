@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import {Spinner} from "./Spinner"
+import { Spinner } from "./Spinner";
 
 import { getDoubleWins } from "../requests";
 
-const INITIAL_CATEGORY = "Actress"
+const INITIAL_CATEGORY = "Actress";
 
 const CATEGORIES = {
   Actor: "Actor",
@@ -27,50 +27,44 @@ const tabsContainerStyle = {
 };
 const tabStyle = {
   color: "white",
-  textTransform: 'none',
+  textTransform: "none",
   fontSize: "24px",
 };
 const winListStyle = {
   mt: 2,
   width: "100%",
-  textAlign: "center"
-
+  textAlign: "center",
 };
 
 export const DoubleWins = () => {
   const [category, setCategory] = useState(INITIAL_CATEGORY);
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = async (event, newValue) => {
-    setIsLoading(true)
+    setIsLoading(true);
     setCategory(newValue);
     const responseData = await getDoubleWins(newValue);
     setData(responseData);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
     const wrapper = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
       const responseData = await getDoubleWins(INITIAL_CATEGORY);
       setData(responseData);
-      setIsLoading(false)
+      setIsLoading(false);
     };
-    wrapper()
+    wrapper();
   }, []);
-
-  if(isLoading){
-    return (
-        <Spinner />
-    )
-  }
 
   return (
     <Box sx={{ width: "100%" }}>
       <div className={"app-container"}>
         <div className={"double-win-info"}>
-          Choose a category to view people who won both an Oscar and a BAFTA for the same role.
+          Choose a category to view people who won both an Oscar and a BAFTA for
+          the same role.
         </div>
         <Tabs
           value={category}
@@ -91,14 +85,20 @@ export const DoubleWins = () => {
             sx={tabStyle}
           />
         </Tabs>
-
-        <Box sx={winListStyle}>
-          {data.map((datum) => {
-            return (
-              <div className={"double-win-list-row"}>{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
-            );
-          })}
-        </Box>
+        {isLoading && <Spinner />}
+        {!isLoading && (
+          <>
+            <Box sx={winListStyle}>
+              {data.map((datum) => {
+                return (
+                  <div
+                    className={"double-win-list-row"}
+                  >{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
+                );
+              })}
+            </Box>
+          </>
+        )}
       </div>
     </Box>
   );
