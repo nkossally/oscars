@@ -18,10 +18,14 @@ const tabsContainerStyle = {
   "& .MuiTabs-indicator": {
     display: "none", // This hides the indicator (underline)
   },
+  "& .MuiTabs-flexContainer": {
+    flexWrap: "wrap", // Enables wrapping
+  },
 };
-
 const tabStyle = {
   color: "white",
+  textTransform: 'none',
+  fontSize: "24px",
 };
 
 export const DoubleWins = () => {
@@ -60,7 +64,7 @@ export const DoubleWins = () => {
         <Box sx={{ mt: 2 }}>
           {data.map((datum) => {
             return (
-              <div>{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
+              <div className={"double-win-list-row"}>{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
             );
           })}
         </Box>
