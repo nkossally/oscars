@@ -30,6 +30,12 @@ const tabStyle = {
   textTransform: 'none',
   fontSize: "24px",
 };
+const winListStyle = {
+  mt: 2,
+  width: "100%",
+  textAlign: "center"
+
+};
 
 export const DoubleWins = () => {
   const [category, setCategory] = useState(INITIAL_CATEGORY);
@@ -63,6 +69,9 @@ export const DoubleWins = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <div className={"app-container"}>
+        <div className={"double-win-info"}>
+          Choose a category to view people who won both an Oscar and a BAFTA for the same role.
+        </div>
         <Tabs
           value={category}
           onChange={handleChange}
@@ -83,7 +92,7 @@ export const DoubleWins = () => {
           />
         </Tabs>
 
-        <Box sx={{ mt: 2 }}>
+        <Box sx={winListStyle}>
           {data.map((datum) => {
             return (
               <div className={"double-win-list-row"}>{`${datum.year}: ${datum.name} - ${datum.detail}`}</div>
