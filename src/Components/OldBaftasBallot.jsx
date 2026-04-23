@@ -97,6 +97,7 @@ export const OldBaftasBallot = () => {
   const [score, setScore] = useState(0);
   const selections = useSelector((state) => state.selections);
   const [year, setYear] = useState(INITIAL_YEAR);
+  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch();
 
   const getTransformedNominees = async () => {
@@ -137,17 +138,20 @@ export const OldBaftasBallot = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const transformed = await getTransformedNominees();
       setTransformedNominees(transformed);
+      setIsLoading(false)
     };
     fetchData();
   }, [year]);
 
   useEffect(() => {}, [year]);
 
-  if (Object.keys(transformedNominees).length === 0) {
+  if (isLoading) {
     return <Spinner />;
   }
+
 
   return (
     <div className="old-ballot-container">
