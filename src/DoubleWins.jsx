@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 
 import { getDoubleWins } from "./requests";
 
+const INITIAL_CATEGORY = "Actress"
+
 const CATEGORIES = {
   Actor: "Actor",
   Actress: "Actress",
@@ -37,6 +39,14 @@ export const DoubleWins = () => {
     const responseData = await getDoubleWins(newValue);
     setData(responseData);
   };
+
+  useEffect(() => {
+    const wrapper = async () => {
+      const responseData = await getDoubleWins(INITIAL_CATEGORY);
+      setData(responseData);
+    };
+    wrapper()
+  });
 
   return (
     <Box sx={{ width: "100%" }}>
