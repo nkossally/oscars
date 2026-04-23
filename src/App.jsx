@@ -27,6 +27,9 @@ function App() {
   const tabsContainerStyle = {
     color: "white",
     margin: "20px 0px 20px 0px",
+    "& .MuiTabs-flexContainer": {
+      flexWrap: "wrap", // Enables wrapping
+    },
     "& .MuiTabs-indicator": {
       display: "none", // This hides the indicator (underline)
     },
@@ -34,6 +37,7 @@ function App() {
 
   const tabStyle = {
     color: "white",
+    fontSize: "18px",
   };
 
   return (
