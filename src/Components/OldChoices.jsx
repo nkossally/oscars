@@ -20,15 +20,21 @@ export const OldChoices = ({ category, options }) => {
     }
   };
 
+  const forScript = <span className="script-text">for</span>
+
   return (
     <div className={"old-choice"}>
       <div className={"category-title"}>{category}</div>
       <div >
         {options.map((option) => {
-          let optionName = `${option.name}${option.detail ? ` for ${option.detail}` : ""}`;
+          let optionName 
           if ((option.name && option.detail && option.name === option.detail) || (option.name == "Unknown")) {
-            optionName = option.detail
-          }
+            optionName = <span>{option.detail}</span> 
+          } else if(option.detail){
+            optionName = <span>{option.name}<span className={"script-text"}> for </span>{option.detail}</span>
+          }else {
+            optionName = <span>{option.name}</span>
+          }  
           return (
             <div className={classNames("single-choice", option.isWinner && "old-choice-winner")} key={optionName}>
               {optionName}
