@@ -13,6 +13,7 @@ const CATEGORIES = {
   Actor: "Actor",
   "Supporting Actress": "Supporting Actress",
   "Supporting Actor": "Supporting Actor",
+  "Picture": "Picture"
 };
 
 const tabsContainerStyle = {
@@ -45,6 +46,7 @@ export const DoubleWins = () => {
     setIsLoading(true);
     setCategory(newValue);
     const responseData = await getDoubleWins(newValue);
+    console.log(responseData)
     setData(responseData);
     setIsLoading(false);
   };
@@ -63,8 +65,7 @@ export const DoubleWins = () => {
     <Box sx={{ width: "100%" }}>
       <div className={"app-container"}>
         <div className={"double-win-info"}>
-          Choose a category to view people who won both an Oscar and a BAFTA for
-          the same role.
+          Choose a category to view people and films which won both an Oscar and a BAFTA.
         </div>
         <Tabs
           value={category}
@@ -84,12 +85,20 @@ export const DoubleWins = () => {
             value="Supporting Actor"
             sx={tabStyle}
           />
+          <Tab label="Picture" value="Picture" sx={tabStyle} />
         </Tabs>
         {isLoading && <Spinner />}
         {!isLoading && (
           <>
             <Box sx={winListStyle}>
               {data.map((datum) => {
+                if (category === CATEGORIES.Picture) {
+                  return (
+                    <div
+                      className={"double-win-list-row"}
+                    >{`${datum["oscar"].year}: ${datum["oscar"].detail}`}</div>
+                  );
+                }
                 return (
                   <div
                     className={"double-win-list-row"}
