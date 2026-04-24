@@ -173,8 +173,8 @@ export const OldBallot = () => {
 
   return (
     <div className="old-ballot-container">
-      <DownshfitAutocomplete handleSelect={setYear} years={years} />
       <div className={"old-ballot-inner-container"}>
+         <DownshfitAutocomplete handleSelect={setYear} years={years} />
         {Object.keys(transformedNominees).map(
           (category) =>
             transformedNominees[category].length > 0 && (
