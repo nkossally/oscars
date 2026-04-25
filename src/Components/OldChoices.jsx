@@ -25,18 +25,43 @@ export const OldChoices = ({ category, options }) => {
   return (
     <div className={"old-choice"}>
       <div className={"category-title"}>{category}</div>
-      <div >
+      <div>
         {options.map((option) => {
-          let optionName 
-          if ((option.name && option.detail && option.name === option.detail) || (option.name == "Unknown")) {
-            optionName = <span>{option.detail}</span> 
-          } else if(option.detail){
-            optionName = <span>{option.name}<span className={"script-text"}> for </span>{option.detail}</span>
-          }else {
-            optionName = <span>{option.name}</span>
-          }  
+          let optionName;
+          let name = option.name;
+          const lastIndex = name.lastIndexOf(",");
+
+          if (lastIndex != -1) {
+            name =
+              name.substring(0, lastIndex) +
+              " and" +
+              name.substring(lastIndex + 1);
+          }
+
+          if (
+            (option.name && option.detail && option.name === option.detail) ||
+            option.name == "Unknown"
+          ) {
+            optionName = <span>{option.detail}</span>;
+          } else if (option.detail) {
+            optionName = (
+              <span>
+                {name}
+                <span className={"script-text"}> for </span>
+                {option.detail}
+              </span>
+            );
+          } else {
+            optionName = <span>{name}</span>;
+          }
           return (
-            <div className={classNames("single-choice", option.isWinner && "old-choice-winner")} key={optionName}>
+            <div
+              className={classNames(
+                "single-choice",
+                option.isWinner && "old-choice-winner",
+              )}
+              key={optionName}
+            >
               {optionName}
             </div>
           );
