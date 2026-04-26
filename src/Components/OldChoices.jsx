@@ -31,7 +31,7 @@ export const OldChoices = ({ category, options }) => {
           let name = option.name;
           const lastIndex = name.lastIndexOf(",");
 
-          if (lastIndex != -1) {
+          if (lastIndex != -1 && !name.includes(" and ")) {
             name =
               name.substring(0, lastIndex) +
               " and" +
