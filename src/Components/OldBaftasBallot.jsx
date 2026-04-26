@@ -118,8 +118,8 @@ export const OldBaftasBallot = () => {
       dispatch(update(newSelections));
     }
     nominees.forEach((nominee) => {
-      const person = nominee["person"]
-      const person_name = person ? person["name"] : "Unknown"
+      const person = nominee["person"];
+      const person_name = person ? person["name"] : "Unknown";
       const category = nominee["category_bafta"]["name"];
       const transformedNominee = {
         name: person_name,
@@ -136,13 +136,16 @@ export const OldBaftasBallot = () => {
     return transformedNominees;
   };
 
+  const fetchData = async () => {
+    setIsLoading(true);
+    const transformed = await getTransformedNominees();
+    setTransformedNominees(transformed);
+    setIsLoading(false);
+  }; 
+
+  console.log(process.env.NODE_ENV)
+
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      const transformed = await getTransformedNominees();
-      setTransformedNominees(transformed);
-      setIsLoading(false)
-    };
     fetchData();
   }, [year]);
 
@@ -157,6 +160,7 @@ export const OldBaftasBallot = () => {
     <div className="old-ballot-container">
       <div className={"old-ballot-inner-container"}>
         <DownshfitAutocomplete handleSelect={setYear} years={years} />
+        {process.env.NODE_ENV === "development" &&<button onClick={fetchData}>Refresh</button>}
         <div className={"ballot-year"}>{year}</div>
         {Object.keys(transformedNominees).map(
           (category) =>
