@@ -143,8 +143,6 @@ export const OldBaftasBallot = () => {
     setIsLoading(false);
   }; 
 
-  console.log(process.env.NODE_ENV)
-
   useEffect(() => {
     fetchData();
   }, [year]);
