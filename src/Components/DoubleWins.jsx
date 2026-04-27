@@ -9,16 +9,19 @@ import { getDoubleWins } from "../requests";
 const INITIAL_CATEGORY = "Actress";
 
 const CATEGORIES = {
+  Picture: "Picture",
+  Director: "Director",
   Actress: "Actress",
   Actor: "Actor",
   "Supporting Actress": "Supporting Actress",
   "Supporting Actor": "Supporting Actor",
-  "Picture": "Picture"
+  "Original Screenplay": "Original Screenplay",
+  "Adapted Screenplay": "Adapted Screenplay",
 };
 
 const tabsContainerStyle = {
   color: "white",
-  margin: "20px 0px 20px 0px",
+  margin: "20px 0px 50px 0px",
   "& .MuiTabs-indicator": {
     display: "none", // This hides the indicator (underline)
   },
@@ -65,14 +68,18 @@ export const DoubleWins = () => {
     <Box sx={{ width: "100%" }}>
       <div className={"app-container"}>
         <div className={"double-win-info"}>
-          Choose a category to view people and films which won both an Oscar and a BAFTA.
+          Choose a category to view people and films which won both an Oscar and
+          a BAFTA.
         </div>
+
         <Tabs
           value={category}
           onChange={handleChange}
           centered
           sx={tabsContainerStyle}
         >
+          <Tab label="Picture" value="Picture" sx={tabStyle} />
+          <Tab label="Director" value="Director" sx={tabStyle} />
           <Tab label="Actress" value="Actress" sx={tabStyle} />
           <Tab label="Actor" value="Actor" sx={tabStyle} />
           <Tab
@@ -85,13 +92,27 @@ export const DoubleWins = () => {
             value="Supporting Actor"
             sx={tabStyle}
           />
-          <Tab label="Picture" value="Picture" sx={tabStyle} />
+          <Tab
+            label="Original Screenplay"
+            value="Original Screenplay"
+            sx={tabStyle}
+          />
+          <Tab
+            label="Adapted Screenplay"
+            value="Adapted Screenplay"
+            sx={tabStyle}
+          />
+          <Tab
+            label="Cinematography"
+            value="Cinematography"
+            sx={tabStyle}
+          />
         </Tabs>
         {isLoading && <Spinner />}
         {!isLoading && (
           <>
             <Box sx={winListStyle}>
-              {data.map((datum) => {
+              {data && data.map((datum) => {
                 if (category === CATEGORIES.Picture) {
                   return (
                     <div

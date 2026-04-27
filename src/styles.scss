@@ -384,12 +384,14 @@ body {
 
 .double-win-info {
   font-size: 24px;
-  margin: 8px 8px 8px 8px;
+  margin: 50px 8px 50px 8px;
   background-color: $gray3;
   padding: 20px 20px;
   width: 80%;
   text-align: center;
   border-radius: 10px;
+  box-shadow: 0 2px 8px $gray3;
+
 }
 
 .script-text {
