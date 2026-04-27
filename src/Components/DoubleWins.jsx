@@ -49,7 +49,6 @@ export const DoubleWins = () => {
     setIsLoading(true);
     setCategory(newValue);
     const responseData = await getDoubleWins(newValue);
-    console.log(responseData)
     setData(responseData);
     setIsLoading(false);
   };
